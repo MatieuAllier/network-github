@@ -50,8 +50,11 @@ def format_tree_df(tree_data):
     list_of_edges = []
     for element in tree_data:
         splits = element['path'].split('/')
-        suffix = element['path'].split('.')
-        file_type = suffix[-1] if len(suffix)>1 else 'folder'
+        if element['type'] == 'tree':
+            file_type = 'folder'
+        else:
+            suffix = element['path'].split('.')
+            file_type = suffix[-1] if len(suffix)>1 else 'other'
         if len(splits) > 1:
             edge = [element["path"], ''.join(splits[:-1]), splits[-1], file_type]
         else:
