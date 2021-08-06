@@ -1,6 +1,5 @@
-# %%
 import requests
-from pandas.io.json import json_normalize
+import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
 import collections.abc
@@ -12,8 +11,6 @@ def update(d, u):
         else:
             d[k] = v
     return d
-
-# %%
 
 def get_repository_tree(owner, rep, branch="master"):
     """
@@ -37,7 +34,7 @@ def get_repository_tree(owner, rep, branch="master"):
         raise ValueError("Error in the API Call check your parameter")
     return tree_data
 
-def format_tree(tree_data):
+def format_tree_dict(tree_data):
     """Format the output of the get_repository function."""
     dict_ordoned_tree = {}
     for element in tree_data:
@@ -49,18 +46,25 @@ def format_tree(tree_data):
         dict_ordoned_tree = update(dict_ordoned_tree, dict_path)
     return dict_ordoned_tree
 
-        
-        
+def format_tree_df(tree_data):
+    list_of_edges = []
+    for element in tree_data:
+        splits = element['path'].split('/')
+        suffix = element['path'].split('.')
+        file_type = suffix[-1] if len(suffix)>1 else 'folder'
+        if len(splits) > 1:
+            edge = [element["path"], ''.join(splits[:-1]), splits[-1], file_type]
+        else:
+            edge = [element["path"], '', splits[-1], file_type]
+        list_of_edges.append(edge)
+    df = pd.DataFrame(list_of_edges, columns = ['Source', 'Target', 'Label', 'File Type'])
+    return df
 
 if __name__ =="__main__":
     owner = "octocat"
     rep = "octocat.github.io"
     branch = "master"
     tree_data = get_repository_tree(owner, rep, branch="master")
-    dict_graph_tree = format_tree(tree_data)
-    #d = {0: {1: {2 : 2}}}
-    G = nx.DiGraph(dict_graph_tree)
-    subax1 = plt.subplot(121)
-    nx.draw(G, with_labels=True, font_weight='bold')
-    plt.show()
-    print(dict_graph_tree)
+    
+    df_graph_tree = format_tree_df(tree_data)
+    print(df_graph_tree)
