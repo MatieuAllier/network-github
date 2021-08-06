@@ -47,6 +47,7 @@ def format_tree_dict(tree_data):
     return dict_ordoned_tree
 
 def format_tree_df(tree_data):
+    """Format the output of the get_repository into a dataframe of nodes and edges."""
     list_of_edges = []
     for element in tree_data:
         splits = element['path'].split('/')
