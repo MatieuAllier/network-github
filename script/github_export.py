@@ -57,7 +57,7 @@ def format_tree_df(tree_data):
             suffix = element['path'].split('.')
             file_type = suffix[-1] if len(suffix)>1 else 'other'
         if len(splits) > 1:
-            edge = [element["path"], ''.join(splits[:-1]), splits[-1], file_type]
+            edge = [element["path"], '/'.join(splits[:-1]), splits[-1], file_type]
         else:
             edge = [element["path"], '', splits[-1], file_type]
         list_of_edges.append(edge)
@@ -65,10 +65,10 @@ def format_tree_df(tree_data):
     return df
 
 if __name__ =="__main__":
-    owner = "octocat"
-    rep = "octocat.github.io"
+    owner = "facebook"
+    rep = "prophet"
     branch = "master"
     tree_data = get_repository_tree(owner, rep, branch="master")
     
     df_graph_tree = format_tree_df(tree_data)
-    print(df_graph_tree)
+    df_graph_tree.to_csv('export.csv')
