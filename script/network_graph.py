@@ -36,6 +36,4 @@ if __name__ == '__main__':
     tree_data = get_repository_tree(owner, rep, branch="master")
     df_graph_tree = format_tree_df(tree_data)
     net = create_network_graph(df_graph_tree)
-    # set the physics layout of the network
-    #net.show_buttons(filter_=['nodes'])
     net.show('test.html')
