@@ -2,7 +2,7 @@ from pyvis.network import Network
 import networkx as nx
 import matplotlib.pyplot as plt
 
-from github_export import get_repository_tree, format_tree_df
+from script.github_export import get_repository_tree, format_tree_df
 
 color_of_extension = {
     "py" : "#3572A5",
@@ -29,11 +29,3 @@ def create_network_graph(df_graph_tree):
             net.add_edge(src, dst, value=1, color = '#ADD8E6')
     return net
     
-if __name__ == '__main__':
-    owner = "facebook"
-    rep = "prophet"
-    branch = "master"
-    tree_data = get_repository_tree(owner, rep, branch="master")
-    df_graph_tree = format_tree_df(tree_data)
-    net = create_network_graph(df_graph_tree)
-    net.show('test.html')
