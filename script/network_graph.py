@@ -35,6 +35,6 @@ def create_network_graph(df_graph_tree):
             net.add_node(src, shape='dot', label=label, color = color, title = title)
         if dst != '':
             #net.add_node(dst, label=label, title=title)
-            net.add_edge(src, dst, value=1, color = '#d3d3d3')
+            net.add_edge(src, dst, value=1, color = '#6c6c6c')
     return net
     
