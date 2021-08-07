@@ -5,7 +5,7 @@ import json
 
 from script.github_export import get_repository_tree, format_tree_df
 
-f = open('colors.json')
+f = open('./ressources/colors.json')
 color_of_extension = json.load(f)
 
 # color_of_extension = {
