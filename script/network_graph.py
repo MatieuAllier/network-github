@@ -1,19 +1,23 @@
 from pyvis.network import Network
 import networkx as nx
 import matplotlib.pyplot as plt
+import json
 
 from script.github_export import get_repository_tree, format_tree_df
 
-color_of_extension = {
-    "py" : "#3572A5",
-    "js" : "#f1e05a",
-    "css" : "#563d7c",
-    "html" : "#e34c26",
-    "json" : "#292929",
-    "folder" : "light grey",
-    "r" : "#198CE7",
-    "rd" : "#198CE7",
-}
+f = open('colors.json')
+color_of_extension = json.load(f)
+
+# color_of_extension = {
+#     "py" : "#3572A5",
+#     "js" : "#f1e05a",
+#     "css" : "#563d7c",
+#     "html" : "#e34c26",
+#     "json" : "#292929",
+#     "folder" : "light grey",
+#     "r" : "#198CE7",
+#     "rd" : "#198CE7",
+# }
 
 def create_network_graph(df_graph_tree):
     """Create a Network from the database of nodes and edges"""
