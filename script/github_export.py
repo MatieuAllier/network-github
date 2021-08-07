@@ -65,8 +65,8 @@ def format_tree_df(tree_data):
     return df
 
 if __name__ =="__main__":
-    owner = "facebook"
-    rep = "prophet"
+    owner = "octocat"
+    rep = "octocat.github.io"
     branch = "master"
     tree_data = get_repository_tree(owner, rep, branch="master")
     
