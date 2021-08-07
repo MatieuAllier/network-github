@@ -13,7 +13,7 @@ if st.sidebar.button('Create Graph'):
         owner = rep_name.split('/')[0]
         rep = rep_name.split('/')[1]
         try:
-            tree_data = get_repository_tree(owner, rep, branch)
+            tree_data = get_repository_tree(owner, rep, branch_name)
             df_graph_tree = format_tree_df(tree_data)
             net = create_network_graph(df_graph_tree)
             # Need to save the graph in html to read it in streamlit
