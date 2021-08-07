@@ -4,9 +4,9 @@ import streamlit.components.v1 as components
 from script.network_graph import create_network_graph
 from script.github_export import get_repository_tree, format_tree_df
 
-rep_name = st.sidebar.text_input('Github Repository Name :', value='octocat/octocat.github.io')
-branch_name = st.sidebar.text_input('Branch Name :', value='master')
-if st.sidebar.button('Create Graph'):
+rep_name = st.text_input('Github Repository Name :', value='octocat/octocat.github.io')
+branch_name = st.text_input('Branch Name :', value='master')
+if st.button('Create Graph'):
     if len(rep_name.split('/')) != 2:
         st.text('This is not a valid Repository Name.')
     else:

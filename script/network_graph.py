@@ -18,7 +18,7 @@ color_of_extension = {
 def create_network_graph(df_graph_tree):
     """Create a Network from the database of nodes and edges"""
     net = Network(height='750px', width='100%', directed=True, bgcolor='#222222', font_color='white')
-    net.force_atlas_2based()
+    net.force_atlas_2based(gravity=-75)
     for index, row in df_graph_tree.iterrows():
         src = row['Source']
         dst = row['Target']
